@@ -1,3 +1,4 @@
+//========Functions for the Routes========//
 require("dotenv").config();
 
 const apiKey = `${process.env.API_KEY}`;
@@ -7,7 +8,7 @@ const baseCurrentURL = `http://api.openweathermap.org/data/2.5/weather?zip=`;
 const baseGeoURL = `http://api.openweathermap.org/geo/1.0/zip?zip=`;
 const baseURL = "http://api.openweathermap.org/data/2.5/forecast?";
 
-// fetch current
+// fetch current weather
 const currentWeather = async (zipCode) => {
     try {
         const url = `${baseCurrentURL}${zipCode},${cc}&appid=${apiKey}&units=${units}`;
@@ -19,7 +20,7 @@ const currentWeather = async (zipCode) => {
     }
 };
 
-// fetch five day
+// fetch five day weather
 const fiveDayWeather = async (zipCode) => {
     try {
         const url = `${baseGeoURL}${zipCode},${cc}&appid=${apiKey}&units=${units}`;
