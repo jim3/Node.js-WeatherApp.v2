@@ -5,12 +5,12 @@ const helpers = require("./helper");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 
-// ------------------ HOME ROUTE ------------------ //
+// render the index page
 router.get("/", async (req, res, next) => {
     res.render("index", { title: "Home" });
 });
 
-// ------------------ POST ROUTE ------------------ //
+// --- post route for the form --- //
 router.post("/", async (req, res) => {
     try {
         const zipCode = req.body.zip;
@@ -31,25 +31,25 @@ router.post("/", async (req, res) => {
             list: list,
             unixTimeConvertor: helpers.unixTimeConvertor,
         });
-        mydb(coord, base, weather, main, wind, clouds, sys, timezone, name);
+        mydb(coord, base, weather, main, wind, clouds, sys, timezone, name); // call the mydb function
     } catch (err) {
         console.error("Error rendering data:", err);
         res.status(500).send("Error getting weather data.");
     }
 });
 
-// ------------------ ABOUT ROUTE ------------------ //
+// render the about page
 router.get("/", async (req, res, next) => {
     res.render("about", { title: "About" });
 });
 
+// 
 router.get("/weather", async (req, res) => {
     const weatherDataCollection = client.db("openweatherapi").collection("weathers");
     const weatherData = await weatherDataCollection.find().toArray();
     res.render("weather", { weatherData: weatherData });
 });
 
-// mongodb atlas
 const uri = `mongodb+srv://${process.env.MONGO_DB_CONNECTION_STRING}`;
 const client = new MongoClient(uri, {
     useNewUrlParser: true,
