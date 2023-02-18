@@ -1,4 +1,3 @@
-//========Functions for the Routes========//
 require("dotenv").config();
 
 const apiKey = `${process.env.API_KEY}`;
@@ -8,7 +7,7 @@ const baseCurrentURL = `http://api.openweathermap.org/data/2.5/weather?zip=`;
 const baseGeoURL = `http://api.openweathermap.org/geo/1.0/zip?zip=`;
 const baseURL = "http://api.openweathermap.org/data/2.5/forecast?";
 
-// fetch current weather
+// fetch current weather data via zip code
 const currentWeather = async (zipCode) => {
     try {
         const url = `${baseCurrentURL}${zipCode},${cc}&appid=${apiKey}&units=${units}`;
@@ -20,13 +19,15 @@ const currentWeather = async (zipCode) => {
     }
 };
 
-// fetch five day weather
+// In order to get the five day / 3 hour forecast, we need to get the lat and lon from the geocoding api
 const fiveDayWeather = async (zipCode) => {
     try {
+        // get lat and lon
         const url = `${baseGeoURL}${zipCode},${cc}&appid=${apiKey}&units=${units}`;
         const geoData = await fetch(url);
         const geoDataJSON = await geoData.json();
         const { lat, lon } = geoDataJSON;
+        // get five day forecast data using lat and lon
         const fiveDayURL = `${baseURL}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
         const fiveDayData = await fetch(fiveDayURL);
         const fiveDayDataJSON = await fiveDayData.json();
@@ -36,5 +37,4 @@ const fiveDayWeather = async (zipCode) => {
     }
 };
 
-// export
 module.exports = { currentWeather, fiveDayWeather };
