@@ -19,7 +19,8 @@ const currentWeather = async (zipCode) => {
     }
 };
 
-// In order to get the five day / 3 hour forecast, we need to get the lat and lon from the geocoding api
+// In order to get the five day / 3 hour forecast, we need to first, get the lat and lon 
+// from the geocoding api. Once that is done, we can then get the 5 day forecast.
 const fiveDayWeather = async (zipCode) => {
     try {
         // get lat and lon
