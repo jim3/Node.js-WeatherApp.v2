@@ -3,9 +3,9 @@
 ### Description
 
 This app uses the OpenWeatherMap API to retrieve the current weather and five-day forecast for a given city.
-The current weather is retrieved using the [Built-in Geocoding](https://openweathermap.org/current#builtin) API.
-For the five-day forecast, OpenWeather's [Geocoding API](https://openweathermap.org/api/geocoding-api) retrieves the weather data based on the user's
-geographical location. The app is built with Node.js, Express, and EJS. MongoDB Atlas is used to store the user's search history.
+For the current weather forecast, the [Built-in Geocoding](https://openweathermap.org/current#builtin) API is used.
+For the five-day forecast, OpenWeather's [Geocoding API](https://openweathermap.org/api/geocoding-api) instead. This API retrieves the weather data based on the user's
+geographical location and is responsible for more accurate results. The app is built with Node.js, Express, and EJS. MongoDB Atlas is used to store the user's search history.
 
 ### Tech Stack
 
